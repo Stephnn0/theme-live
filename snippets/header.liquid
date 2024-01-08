@@ -1,0 +1,32 @@
+<header class="header-nav">
+  <div>
+    <h1>{{ shop.name }}</h1>
+  </div>
+
+  <div>
+    <ul>
+      {% for link in linklists.main-menu.links -%}
+        <li>{{ link.title | link_to: link.url }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+
+  <div>
+    <input placeholder="search" />
+    <p>icon</p>
+    <p>icon</p>
+  </div>
+
+
+</header>
+
+<style>
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 1px;
+    background-color: white;
+
+  }
+</style>

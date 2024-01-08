@@ -1,11 +1,16 @@
 {
     "sections": {
-      "main": {
+      "banner": {
         "type": "banner",
+        "settings": {}
+      },
+      "three-images": {
+        "type": "three-images",
         "settings": {}
       }
     },
     "order": [
-      "main"
+      "banner",
+      "three-images"
     ]
   }

@@ -1,5 +1,16 @@
 <section>
-  <h1>banner</h1>
+  <h1>Collections</h1>
+  <h2>{{ collections['dunks'].title }}</h2>
+
+  {% for product in collections['Dunk'].products %}
+    <div>
+      <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" />
+      <h1>{{ product.title | link_to: product.url }}</h1>
+      <p>{{ product.price | money }}</p>
+    </div>
+  {% endfor %}
+
+
 </section>
 
 

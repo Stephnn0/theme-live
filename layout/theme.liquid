@@ -2,12 +2,21 @@
   <head>{% render 'pagefly-head' %}
     {{ content_for_header }}
 
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
   </head>
   <body>
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
 
-    <h1>hello world</h1>
+    <main id="main" role="main">
+      {{ content_for_layout }}
+    </main>
 
-    {{ content_for_layout }}
+    {% section 'footer' %}
+
+    {% comment %} {{ 'theme.js' | asset_url | script_tag }} {% endcomment %}
+
 
   </body>
 </html>

@@ -1,0 +1,98 @@
+{%- if section.settings.show_announcement -%}
+
+  <section>
+    <div class="announcement-bar">
+      <div class="announcement-bar-left-section">
+        {%- if section.settings.image2 != blank -%}
+
+          <img src="{{ section.settings.image2 | image_url: height: 40, width: 40 }}">
+        {%- else -%}
+          <p>no image 2</p>
+        {%- endif -%}
+        {%- if section.settings.image != blank -%}
+
+          <img src="{{ section.settings.image | image_url: height: 40, width: 40 }}">
+        {%- else -%}
+          <p>no image</p>
+        {%- endif -%}
+
+      </div>
+      <div class="announcement-bar-right-section">
+        <ul class="announcement-bar-inner-list">
+          <li>
+            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
+          </li>
+          <li>
+            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
+          </li>
+          <li>
+            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
+          </li>
+          <li>
+            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .announcement-bar {
+      background: {{ section.settings.background }}
+      ;
+      color: {{ section.settings.text_color }}
+      ;
+    }
+  </style>
+
+  <script></script>
+
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "Announcement bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "image",
+        "info": "400 x 120px .png recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "image2",
+        "info": "400 x 120px .png recommended"
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#F4F4F4"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text",
+        "default": "#000000"
+      }, {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "link"
+      }, {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      }
+    ]
+  }
+{% endschema %}
