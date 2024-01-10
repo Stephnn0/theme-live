@@ -1,13 +1,38 @@
-<footer>
+<footer class="footer-main">
   <h1>footer</h1>
 </footer>
 
+<style>
+  .footer-main {
+    background: {{ section.settings.background }}
+    ;
+    color: {{ section.settings.text_color }}
+    ;
+    padding: 10px;
+  }
+</style>
 
 {% schema %}
-  {
-    "name": "Footer",
-    "settings": [],
-    "presets": []
-
-  }
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#F4F4F4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "footer"
+    }
+  ]
+}
 {% endschema %}

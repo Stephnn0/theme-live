@@ -1,0 +1,60 @@
+<section class="all-products">
+  <h1>{{ collections['air-force'].title }}</h1>
+  <div class="all-products-wrapper">
+    {% for product in collections['air-force'].products %}
+      <div class="product-card">
+        <img
+          width="300"
+          height="300"
+          loading="lazy"
+          src="{{ product.featured_image | image_url}}"
+        >
+        <h3>{{- product.title | link_to: product.url }}</h3>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  .all-products {
+    background: {{ section.settings.background }}
+    ;
+    color: {{ section.settings.text_color }}
+    ;
+    padding: 10px;
+
+  }
+
+  .all-products-wrapper {
+      display: flex;
+  }
+
+  .product-card {
+    padding: 10px;
+    }
+</style>
+
+{% schema %}
+{
+  "name": "all-products",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "all-products"
+    }
+  ]
+}
+{% endschema %}

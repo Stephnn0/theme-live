@@ -1,0 +1,55 @@
+{% form 'cart', cart %}
+  <section>
+    <h1>Cart</h1>
+    {% if cart.empty? %}
+      <p>cart is empty</p>
+
+    {% else %}
+      <div>
+        {% for item in cart.items %}
+          <img
+            width="200"
+            height="200"
+            loading="lazy"
+            src="{{ item.image | image_url}}"
+          >
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.final_line_price | money }}</p>
+
+          <hr>
+          <input name="updates[]" value="{{item.quantity }}">
+          <a href="{{ item.url_to_remove }}">remove</a>
+          <p>Total: {{ cart.total_price | money }}</p>
+        {% endfor %}
+        <button type="submit" name="update">update</button>
+
+        <button type="submit" name="checkout">Checkout</button>
+      </div>
+    {% endif %}
+  </section>
+{% endform %}
+
+{% schema %}
+{
+  "name": "cart",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "cart"
+    }
+  ]
+}
+{% endschema %}

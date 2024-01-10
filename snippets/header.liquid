@@ -1,32 +1,82 @@
 <header class="header-nav">
   <div>
-    <h1>{{ shop.name }}</h1>
+    {% comment %} <h1>{{ shop.name }}</h1> {% endcomment %}
+    <img
+      width="80"
+      height="50"
+      loading="lazy"
+      src="{{ 'nike.png' | asset_url }}"
+    >
   </div>
 
   <div>
-    <ul>
-      {% for link in linklists.main-menu.links -%}
+    <ul class="middle-nav-links">
+      {% for link in linklists['main-menu'].links -%}
         <li>{{ link.title | link_to: link.url }}</li>
       {%- endfor %}
     </ul>
   </div>
 
-  <div>
-    <input placeholder="search" />
-    <p>icon</p>
-    <p>icon</p>
+  <div class="right-nav-items">
+    <form action="/search">
+      <input class="search-nav" placeholder="search" type="search">
+    </form>
+
+    <a href="/cart">
+      <img
+        class="shopping-img"
+        width="40"
+        height="40"
+        loading="lazy"
+        src="{{ 'd.png' | asset_url }}"
+      >
+    </a>
   </div>
-
-
 </header>
 
 <style>
+  .shopping-img {
+    cursor: 'pointer';
+    margin-bottom: 10px;
+  }
   .header-nav {
     display: flex;
     justify-content: space-between;
     margin: 0;
     padding: 1px;
     background-color: white;
+    padding: 0 30px 0 30px;
+  }
 
+  .middle-nav-links {
+    display: flex;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  .middle-nav-links li {
+    list-style-type: none;
+    padding: 10px;
+  }
+
+  .middle-nav-links li:hover {
+    text-decoration: underline;
+  }
+
+  .middle-nav-links a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .right-nav-items {
+    display: flex;
+    align-items: center;
+  }
+  .search-nav {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(239, 234, 234);
   }
 </style>

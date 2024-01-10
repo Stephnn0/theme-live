@@ -1,24 +1,89 @@
 <section>
-  <h1>Collections</h1>
-  <h2>{{ collections['dunks'].title }}</h2>
-
-  {% for product in collections['Dunk'].products %}
-    <div>
-      <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" />
-      <h1>{{ product.title | link_to: product.url }}</h1>
-      <p>{{ product.price | money }}</p>
-    </div>
-  {% endfor %}
-
-
+  <div class="banner-wrapper">
+    <div class="slide-text" id="text1"><p>Members: Free Shipping!</p></div>
+    <div class="slide-text" id="text2">Save Up to 40%</div>
+    <div class="slide-text" id="text3">Get Your Gear Faster</div>
+  </div>
 </section>
 
-
-{% schema %}
-  {
-    "name": "Banner",
-    "settings": [],
-    "presets": []
+<style>
+  .banner-wrapper {
+    padding: 30px;
+    background: {{ section.settings.background }}
+    ;
+    color: {{ section.settings.text_color }}
+    ;
 
   }
+
+  .slide-text {
+    position: absolute;
+    top: 155px;
+    left: -150%; /* Initially position the divs outside the left edge of the screen */
+    transform: translate(0, -50%);
+    color: black;
+    padding: 20px;
+    font-size: 20px;
+    transition: left 0.5s ease-in-out; /* Add a smooth transition effect */
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const text1 = document.getElementById('text1');
+    const text2 = document.getElementById('text2');
+    const text3 = document.getElementById('text3');
+
+    // Array of text elements
+    const texts = [text1, text2, text3];
+    let currentIndex = 0;
+
+    // Function to slide the text to the middle
+    function slideToMiddle(element) {
+      element.style.left = '40%';
+    }
+
+    // Function to reset the position of the text
+    function resetPosition(element) {
+      element.style.left = '-100%';
+    }
+
+    // Function to handle sliding the text elements
+    function slideText() {
+      resetPosition(texts[currentIndex]);
+      currentIndex = (currentIndex + 1) % texts.length;
+      slideToMiddle(texts[currentIndex]);
+    }
+
+    // Initial slide
+    slideToMiddle(texts[currentIndex]);
+
+    // Set interval to slide the text every 3 seconds
+    setInterval(slideText, 3000);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "banner"
+    }
+  ]
+}
 {% endschema %}

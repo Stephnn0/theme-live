@@ -1,0 +1,96 @@
+{% paginate collection.products by 4 %}
+  <section class="collection-sec">
+    <h1>collections</h1>
+    <p>{{ collection.title }}</p>
+    <div>
+      <select id="sort-by">
+        {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+        {% for option in collection.sort_options %}
+          <option
+            value="{{ option.value }}"
+            {% if option.value == sort_by %}
+              selected="selected"
+            {% endif %}
+          >
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      {% for product in collection.products %}
+        <div class="product-card">
+          <img
+            width="300"
+            height="300"
+            loading="lazy"
+            src="{{ product.featured_image | image_url}}"
+          >
+          <h3>{{- product.title | link_to: product.url }}</h3>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {{ paginate | default_pagination }}
+{% endpaginate %}
+
+<style>
+  .collection-sec {
+    background: {{ section.settings.background }}
+    ;
+    color: {{ section.settings.text_color }}
+    ;
+    padding: 10px;
+  }
+</style>
+
+<script>
+  Shopify.queryParams = {};
+
+  // Preserve existing query parameters
+  if (location.search.length) {
+    var params = location.search.substr(1).split('&');
+
+    for (var i = 0; i < params.length; i++) {
+      var keyValue = params[i].split('=');
+
+      if (keyValue.length) {
+        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+      }
+    }
+  }
+
+  // Update sort_by query parameter on select change
+  document.querySelector('#sort-by').addEventListener('change', function (e) {
+    var value = e.target.value;
+
+    Shopify.queryParams.sort_by = value;
+    location.search = new URLSearchParams(Shopify.queryParams).toString();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "collection",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "collection"
+    }
+  ]
+}
+{% endschema %}

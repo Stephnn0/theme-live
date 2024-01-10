@@ -1,38 +1,55 @@
 {%- if section.settings.show_announcement -%}
-
   <section>
     <div class="announcement-bar">
       <div class="announcement-bar-left-section">
         {%- if section.settings.image2 != blank -%}
-
-          <img src="{{ section.settings.image2 | image_url: height: 40, width: 40 }}">
+          <img
+            width="40"
+            height="40"
+            loading="lazy"
+            src="{{ section.settings.image2 | image_url }}"
+          >
         {%- else -%}
-          <p>no image 2</p>
+          <img
+            width="40"
+            height="40"
+            loading="lazy"
+            src="{{ 'a.png' | asset_url }}"
+          >
         {%- endif -%}
         {%- if section.settings.image != blank -%}
-
-          <img src="{{ section.settings.image | image_url: height: 40, width: 40 }}">
+          <img
+            width="35"
+            height="35"
+            loading="lazy"
+            src="{{ section.settings.image | image_url }}"
+          >
         {%- else -%}
-          <p>no image</p>
+          <img
+            width="35"
+            height="35"
+            loading="lazy"
+            src="{{ 'b.png' | asset_url }}"
+          >
         {%- endif -%}
-
       </div>
       <div class="announcement-bar-right-section">
         <ul class="announcement-bar-inner-list">
-          <li>
-            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
-          </li>
-          <li>
-            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
-          </li>
-          <li>
-            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
-          </li>
-          <li>
-            <a href="{{ section.settings.link }}">{{ section.settings.text | escape }}</a>
-          </li>
+          {%- if section.blocks.size == 0 -%}
+            <li>
+              <a href="#">Help</a>
+            </li>
+            <li>
+              <a href="/account/login">Sign in</a>
+            </li>
+          {%- else -%}
+            {% for block in section.blocks %}
+              <li>
+                <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
+              </li>
+            {% endfor %}
+          {%- endif -%}
         </ul>
-
       </div>
     </div>
   </section>
@@ -47,52 +64,62 @@
   </style>
 
   <script></script>
-
 {%- endif -%}
 
-
 {% schema %}
-  {
-    "name": "Announcement bar",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_announcement",
-        "label": "Show announcement",
-        "default": true
-      },
-      {
-        "type": "image_picker",
-        "id": "image",
-        "label": "image",
-        "info": "400 x 120px .png recommended"
-      },
-      {
-        "type": "image_picker",
-        "id": "image2",
-        "label": "image2",
-        "info": "400 x 120px .png recommended"
-      },
-      {
-        "type": "color",
-        "id": "background",
-        "label": "Background",
-        "default": "#F4F4F4"
-      }, {
-        "type": "color",
-        "id": "text_color",
-        "label": "Text",
-        "default": "#000000"
-      }, {
-        "type": "text",
-        "id": "text",
-        "label": "Text",
-        "default": "link"
-      }, {
-        "type": "url",
-        "id": "link",
-        "label": "Link"
-      }
-    ]
-  }
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image",
+      "info": "400 x 120px .png recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "image2",
+      "info": "400 x 120px .png recommended"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Links",
+      "type": "links",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
