@@ -1,7 +1,7 @@
 {
     "sections": {
       "main": {
-        "type": "main-404",
+        "type": "main-customers-register",
         "settings": {
         }
       }
@@ -9,4 +9,4 @@
     "order": [
       "main"
     ]
-}
+  }

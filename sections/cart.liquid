@@ -1,9 +1,10 @@
 {% form 'cart', cart %}
-  <section>
-    <h1>Cart</h1>
+  <section class="cart-sec">
     {% if cart.empty? %}
-      <p>cart is empty</p>
+      <div class="empty-cart">
+        <p>cart is empty</p>
 
+        <div>
     {% else %}
       <div>
         {% for item in cart.items %}
@@ -28,6 +29,16 @@
     {% endif %}
   </section>
 {% endform %}
+
+<style>
+  .cart-sec {
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the height to the full viewport height */
+  }
+</style>
 
 {% schema %}
 {

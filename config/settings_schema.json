@@ -1,5 +1,13 @@
 [
     {
+        "name": "theme_info",
+        "theme_name": "Nike",
+        "theme_author": "Stephano",
+        "theme_version": "2.8.4",
+        "theme_documentation_url": "",
+        "theme_support_url": ""
+      },
+    {
         "name": "Colors",
         "settings": [
             {
@@ -9,6 +17,48 @@
                 "default": "#ffffff"
             }
         ]
-    }
+    },
+    {
+        "name": "Typography",
+        "settings": [
+          {
+            "type": "range",
+            "id": "base_text_font_size",
+            "label": "Base size",
+            "info": "All texts, including headings, will scale accordingly.",
+            "min": 14,
+            "max": 20,
+            "unit": "px",
+            "default": 15
+          },
+          {
+            "type": "header",
+            "content": "Headings"
+          },
+          {
+            "type": "font_picker",
+            "id": "heading_font",
+            "label": "Font",
+            "default": "helvetica_n4"
+          },
+          {
+            "type": "header",
+            "content": "Body text"
+          },
+          {
+            "type": "font_picker",
+            "id": "text_font",
+            "label": "Font",
+            "default": "helvetica_n4"
+          },
+          {
+            "type": "checkbox",
+            "id": "underline_links",
+            "label": "Underline links",
+            "info": "Only applies to links defined in rich text fields.",
+            "default": false
+          }
+        ]
+      }
 
 ]

@@ -1,17 +1,19 @@
 <section class="all-products">
   <h1>{{ collections['air-force'].title }}</h1>
-  <div class="all-products-wrapper">
-    {% for product in collections['air-force'].products %}
-      <div class="product-card">
-        <img
-          width="300"
-          height="300"
-          loading="lazy"
-          src="{{ product.featured_image | image_url}}"
-        >
-        <h3>{{- product.title | link_to: product.url }}</h3>
-      </div>
-    {% endfor %}
+  <div class="product-container">
+    <div class="all-products-wrapper">
+      {% for product in collections['air-force'].products %}
+        <div class="product-card">
+          <img
+            width="300"
+            height="300"
+            loading="lazy"
+            src="{{ product.featured_image | image_url}}"
+          >
+          <h3>{{- product.title | link_to: product.url }}</h3>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -27,12 +29,57 @@
 
   .all-products-wrapper {
       display: flex;
+      transition: transform 0.3s ease; /* Add smooth transition effect */
+
+  }
+  .product-container {
+    position: relative;
+    overflow-x: scroll;
   }
 
   .product-card {
     padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    }
+
+    .product-card h3 a {
+      color: black;
+      text-decoration: none
+    }
+
+    .product-card a:hover {
+      text-decoration: underline;
     }
 </style>
+
+{% comment %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const wrapper = document.querySelector('.all-collections-wrapper');
+      const scrollLeftButton = document.querySelector('.scroll-left');
+      const scrollRightButton = document.querySelector('.scroll-right');
+
+      scrollLeftButton.addEventListener('click', function () {
+        wrapper.scrollBy({
+          left: -300, // Adjust based on your card width
+          behavior: 'smooth',
+        });
+      });
+
+      scrollRightButton.addEventListener('click', function () {
+        wrapper.scrollBy({
+          left: 300, // Adjust based on your card width
+          behavior: 'smooth',
+        });
+      });
+    });
+  </script>
+{% endcomment %}
 
 {% schema %}
 {

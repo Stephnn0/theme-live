@@ -1,17 +1,26 @@
 <section class="all-collections">
   <h1>Featured Collections</h1>
-  <div class="all-collections-wrapper">
-    {% for collection in collections %}
-      <div class="collection-card">
-        <img
-          width="300"
-          height="300"
-          loading="lazy"
-          src="{{ collection.featured_image | image_url}}"
-        >
-        <h3>{{- collection.title | link_to: collection.url }}</h3>
+  <div class="collection-container">
+    <div class="all-collections-wrapper">
+      {% for collection in collections %}
+        <div class="collection-card">
+          <img
+            width="300"
+            height="300"
+            loading="lazy"
+            src="{{ collection.featured_image | image_url}}"
+          >
+          <h3>{{- collection.title | link_to: collection.url }}</h3>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% comment %}
+      <div class="scroll-buttons">
+        <button class="scroll-left">&lt;</button>
+        <button class="scroll-right">&gt;</button>
       </div>
-    {% endfor %}
+    {% endcomment %}
   </div>
 </section>
 
@@ -24,14 +33,56 @@
     padding: 10px;
   }
 
+  .collection-container {
+    position: relative;
+    overflow-x: scroll;
+  }
+
   .all-collections-wrapper {
-      display: flex;
+    display: flex;
+    transition: transform 0.3s ease; /* Add smooth transition effect */
   }
 
   .collection-card {
     padding: 5px;
-    }
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .collection-card h3 a {
+    color: black;
+    text-decoration: none
+  }
+
+  .collection-card a:hover {
+    text-decoration: underline;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const wrapper = document.querySelector('.all-collections-wrapper');
+    const scrollLeftButton = document.querySelector('.scroll-left');
+    const scrollRightButton = document.querySelector('.scroll-right');
+
+    scrollLeftButton.addEventListener('click', function () {
+      wrapper.scrollBy({
+        left: -300, // Adjust based on your card width
+        behavior: 'smooth',
+      });
+    });
+
+    scrollRightButton.addEventListener('click', function () {
+      wrapper.scrollBy({
+        left: 300, // Adjust based on your card width
+        behavior: 'smooth',
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {

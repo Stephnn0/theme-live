@@ -39,9 +39,20 @@
             <li>
               <a href="#">Help</a>
             </li>
-            <li>
-              <a href="/account/login">Sign in</a>
-            </li>
+
+            {% if shop.customer_accounts_enabled %}
+              {% if customer %}
+                <li>
+                  <a href="/account">Account</a>
+                </li>
+
+              {% else %}
+                <li>
+                  <a href="/account/login">Sign in</a>
+                </li>
+              {% endif %}
+            {% endif %}
+
           {%- else -%}
             {% for block in section.blocks %}
               <li>

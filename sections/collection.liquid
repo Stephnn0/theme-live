@@ -1,7 +1,5 @@
 {% paginate collection.products by 4 %}
   <section class="collection-sec">
-    <h1>collections</h1>
-    <p>{{ collection.title }}</p>
     <div>
       <select id="sort-by">
         {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
@@ -17,18 +15,23 @@
           </option>
         {% endfor %}
       </select>
-
-      {% for product in collection.products %}
-        <div class="product-card">
-          <img
-            width="300"
-            height="300"
-            loading="lazy"
-            src="{{ product.featured_image | image_url}}"
-          >
-          <h3>{{- product.title | link_to: product.url }}</h3>
-        </div>
-      {% endfor %}
+    </div>
+    <div>
+      <h1>collections</h1>
+      <p>{{ collection.title }}</p>
+      <div class="products-grid">
+        {% for product in collection.products %}
+          <div class="product-card">
+            <img
+              width="300"
+              height="300"
+              loading="lazy"
+              src="{{ product.featured_image | image_url}}"
+            >
+            <h3>{{- product.title | link_to: product.url }}</h3>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </section>
 
@@ -42,6 +45,24 @@
     color: {{ section.settings.text_color }}
     ;
     padding: 10px;
+    display: flex;
+    justify-content: space-between
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Adjust the gap between grid items */
+  }
+
+  .product-card {
+    border: 1px solid #ddd; /* Add a border for each product card */
+    padding: 10px;
+    text-align: center;
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
   }
 </style>
 

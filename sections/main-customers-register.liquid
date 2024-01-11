@@ -1,0 +1,33 @@
+{% form 'create_customer' %}
+  {{ form.errors | default_errors }}
+
+  <div class="first-name">
+    <label for="first-name">First name</label>
+    <input type="text" name="customer[first_name]">
+  </div>
+
+  <div class="last-name">
+    <label for="last-name">Last name</label>
+    <input type="text" name="customer[last_name]">
+  </div>
+
+  <div class="email">
+    <label for="email">Email</label>
+    <input type="email" name="customer[email]">
+  </div>
+
+  <div class="password">
+    <label for="password">Password</label>
+    <input type="password" name="customer[password]">
+  </div>
+
+  <div class="submit">
+    <input type="submit" value="Create">
+  </div>
+{% endform %}
+
+{% schema %}
+{
+  "name": "Register"
+}
+{% endschema %}

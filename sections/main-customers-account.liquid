@@ -1,0 +1,60 @@
+<section>
+  <h1>customer account</h1>
+  <div>
+    {% paginate customer.orders by 10 %}
+      {% for order in customer.orders %}
+        <!-- order info -->
+      {% endfor %}
+
+      {{ paginate | default_pagination }}
+    {% endpaginate %}
+  </div>
+  <div>
+    {% if customer.default_address %}
+      <p>{{ customer.default_address.address1 }}</p>
+
+      {% if customer.default_address.address2 != blank %}
+        <p>{{ customer.default_address.address2 }}</p>
+      {% endif %}
+
+      <p>
+        {{ customer.default_address.city }},
+        {% if customer.default_address.province_code %}{{ customer.default_address.province_code }}{% endif %},
+        {{ customer.default_address.country_code }}
+        <p>{{ customer.default_address.zip_code }}</p>
+        <p>{{ customer.default_address.phone }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-account.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

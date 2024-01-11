@@ -1,22 +1,82 @@
-<section>
+<section class="login-section">
   {% form 'customer_login' %}
     {{ form.errors | default_errors }}
 
-    <div class="email">
-      <label for="email">Email</label>
-      <input type="email" name="customer[email]">
-    </div>
+    <div class="login-form">
+      <div class="email">
+        <input
+          placeholder="email"
 
-    <div class="password">
-      <label for="password">Password</label>
-      <input type="password" name="customer[password]">
-    </div>
+          type="email"
+          name="customer[email]"
+        >
+      </div>
 
-    <div class="submit">
-      <input type="submit" value="Sign in">
+      <div class="password">
+        <input
+          type="password"
+          name="customer[password]"
+          placeholder="password"
+        >
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="Sign in">
+      </div>
     </div>
   {% endform %}
 </section>
+
+<style>
+  .login-section {
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the height to the full viewport height */
+  }
+
+  .login-form {
+    background-color: white;
+
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .login-form input[type='submit'] {
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .login-form input[type='submit']:hover {
+    background-color: #2980b9;
+  }
+
+  .login-form div {
+    margin-bottom: 10px;
+  }
+</style>
 
 {% schema %}
 {
